@@ -2,6 +2,8 @@ import Phaser from "phaser";
 import preload from "./scenes/preload"
 import world from "./scenes/world"
 import VirtualJoystickPlugin from "phaser3-rex-plugins/plugins/virtualjoystick-plugin.js";
+import UIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
+import EventEmitterMethods from 'phaser3-rex-plugins/plugins/utils/eventemitter/EventEmitterMethods.js';
 
 
 export default class Game extends Phaser.Game {
@@ -24,6 +26,11 @@ export default class Game extends Phaser.Game {
             start: true,
           },
         ],
+        scene: [{
+          key: 'rexUI',
+          plugin: UIPlugin,
+          mapping: 'rexUI'
+      }]
       },  
       scale: {
         zoom: 1,

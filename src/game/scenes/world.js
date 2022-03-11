@@ -1,4 +1,9 @@
 import Phaser from "phaser";
+
+const COLOR_PRIMARY = 0x4e342e;
+const COLOR_LIGHT = 0x7b5e57;
+const COLOR_DARK = 0x260e04;
+
 export default class world extends Phaser.Scene {
   constructor() {
     super("world");
@@ -9,7 +14,9 @@ export default class world extends Phaser.Scene {
     console.log("*** init world");
   }
 
-  preload() {}
+  preload() {
+
+  }
 
   create() {
     console.log("*** create world: ", this);
@@ -26,31 +33,31 @@ export default class world extends Phaser.Scene {
       .createLayer("mapLayer", groundTiles, 0, 0)
       .setScale(this.zoomFactor);
 
-    let moongatePos = map.findObject(
-      "objectLayer",
-      (obj) => obj.name === "moonGate"
-    );
-    let playerPos = map.findObject(
-      "objectLayer",
-      (obj) => obj.name === "player"
-    );
-    let paladinPos = map.findObject(
-      "objectLayer",
-      (obj) => obj.name === "paladin"
-    );
-    let fighterPos = map.findObject(
-      "objectLayer",
-      (obj) => obj.name === "fighter"
-    );
-    let thiefPos = map.findObject("objectLayer", (obj) => obj.name === "thief");
-    let valkriePos = map.findObject(
-      "objectLayer",
-      (obj) => obj.name === "valkrie"
-    );
-    let clericPos = map.findObject(
-      "objectLayer",
-      (obj) => obj.name === "cleric"
-    );
+    // let moongatePos = map.findObject(
+    //   "objectLayer",
+    //   (obj) => obj.name === "moonGate"
+    // );
+    // let playerPos = map.findObject(
+    //   "objectLayer",
+    //   (obj) => obj.name === "player"
+    // );
+    // let paladinPos = map.findObject(
+    //   "objectLayer",
+    //   (obj) => obj.name === "paladin"
+    // );
+    // let fighterPos = map.findObject(
+    //   "objectLayer",
+    //   (obj) => obj.name === "fighter"
+    // );
+    // let thiefPos = map.findObject("objectLayer", (obj) => obj.name === "thief");
+    // let valkriePos = map.findObject(
+    //   "objectLayer",
+    //   (obj) => obj.name === "valkrie"
+    // );
+    // let clericPos = map.findObject(
+    //   "objectLayer",
+    //   (obj) => obj.name === "cleric"
+    // );
 
     this.player = {};
     this.player.x = 300;
@@ -77,7 +84,6 @@ export default class world extends Phaser.Scene {
     this.minimap.setBackgroundColor(0x000000);
     this.minimap.startFollow(this.player);
 
-    this.cursors = this.input.keyboard.createCursorKeys();
 
     var config = {
       x: 100,
@@ -94,13 +100,25 @@ export default class world extends Phaser.Scene {
     // fix the text to the camera
     this.text.setScrollFactor(0);
 
-    console.log("this.plugins: ", this.plugins.get("rexVirtualJoystick"))
+    console.log("this.plugins: ", 
+    this.plugins.get("rexVirtualJoystick").add(this, config))
 
     this.joyStick = this.plugins
       .get("rexVirtualJoystick")
       .add(this, config)
-      .on("update", this.dumpJoyStickState, this);
-    this.dumpJoyStickState();
+      //.on("update", this.dumpJoyStickState, this);
+    //this.dumpJoyStickState();
+
+    // this.cursors = this.input.keyboard.createCursorKeys();
+
+    // var knob0 = CreateKnob(this, 100, 100, 'pan').layout();
+    // var print0 = this.add.text(0, 0, '');
+    // knob0
+    //     .on('valuechange', function (value) { print0.text = value; })
+    //     .setValue(0.5);
+    //this.add.text(0, 580, 'Pan this knob');
+
+
   }
 
   update() {
@@ -147,4 +165,36 @@ export default class world extends Phaser.Scene {
     s += "Angle: " + Math.floor(this.joyStick.angle * 100) / 100 + "\n";
     this.text.setText(s);
   }
+}
+
+var CreateKnob = function (scene, x, y, inputMode) {
+  return scene.rexUI.add.knob({
+      x: x, y: y,
+      width: 200, height: 200,
+
+      space: { left: 20, right: 20, top: 20, bottom: 20 },
+
+      background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY).setStrokeStyle(1, COLOR_LIGHT),
+
+      trackColor: COLOR_DARK,
+      barColor: COLOR_LIGHT,
+      // centerColor: COLOR_PRIMARY,
+      // anticlockwise: true,
+
+      text: scene.rexUI.add.label({
+          text: scene.add.text(0, 0, '', {
+              fontSize: '30px',
+          }),
+          //icon: scene.add.image(0, 0, 'volume'),
+          space: {
+              icon: 10
+          }
+      }),
+      textFormatCallback: function (value) {
+          return Math.floor(value * 100).toString();
+      },
+
+      easeValue: { duration: 250 },
+      input: inputMode
+  })
 }

@@ -106,10 +106,11 @@ export default class world extends Phaser.Scene {
     this.joyStick = this.plugins
       .get("rexVirtualJoystick")
       .add(this, config)
-      //.on("update", this.dumpJoyStickState, this);
-    //this.dumpJoyStickState();
+      .on("update", this.dumpJoyStickState, this);
+      
+    this.dumpJoyStickState();
 
-    // this.cursors = this.input.keyboard.createCursorKeys();
+    this.cursors = this.input.keyboard.createCursorKeys();
 
     // var knob0 = CreateKnob(this, 100, 100, 'pan').layout();
     // var print0 = this.add.text(0, 0, '');

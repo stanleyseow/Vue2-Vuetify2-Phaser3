@@ -5,14 +5,19 @@
 </template>
 
 <script>
+import Phaser from "phaser";
 import Game from "../game/index";
 export default {
   data() {
-    return {};
+    return {
+      game: null
+    };
   },
   mounted() {
     console.log("start Phaser when mounted") ;
-    window.Phaser = new Game(); 
+    window.Phaser = Phaser;
+
+    this.game = new Game();
   },
   methods: {},
   watch: {},

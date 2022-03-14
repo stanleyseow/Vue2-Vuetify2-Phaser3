@@ -87,13 +87,13 @@ export default class world extends Phaser.Scene {
 
     var config = {
       x: 100,
-      y: 400,
+      y: 550,
       radius: 50,
       base: this.add.circle(0, 0, 50, 0x888888),
       thumb: this.add.circle(0, 0, 25, 0xcccccc),
     };
 
-    this.text = this.add.text(20, 450, "0", {
+    this.text = this.add.text(50, 420, "0", {
       fontSize: "20px",
       fill: "#ffffff",
     });
@@ -108,34 +108,28 @@ export default class world extends Phaser.Scene {
       .add(this, config)
       .on("update", this.dumpJoyStickState, this);
       
-    this.dumpJoyStickState();
-
+    
     this.cursors = this.input.keyboard.createCursorKeys();
-
-    // var knob0 = CreateKnob(this, 100, 100, 'pan').layout();
-    // var print0 = this.add.text(0, 0, '');
-    // knob0
-    //     .on('valuechange', function (value) { print0.text = value; })
-    //     .setValue(0.5);
-    //this.add.text(0, 580, 'Pan this knob');
-
-
   }
 
   update() {
-    let speed = 256;
 
-    if (this.cursors.left.isDown) {
-      this.player.body.setVelocityX(-speed);
-    } else if (this.cursors.right.isDown) {
-      this.player.body.setVelocityX(speed);
-    } else if (this.cursors.up.isDown) {
-      this.player.body.setVelocityY(-speed);
-    } else if (this.cursors.down.isDown) {
-      this.player.body.setVelocityY(speed);
+    this.speed = 256;
+    this.dumpJoyStickState();
+
+    // keyboard & vJoysticks keys
+    if (this.cursors.left.isDown ||this.cursorKeys.left.isDown ) {
+      this.player.body.setVelocityX(-this.speed);
+    } else if (this.cursors.right.isDown || this.cursorKeys.right.isDown ) {
+      this.player.body.setVelocityX(this.speed);
+    } else if (this.cursors.up.isDown || this.cursorKeys.up.isDown) {
+      this.player.body.setVelocityY(-this.speed);
+    } else if (this.cursors.down.isDown || this.cursorKeys.down.isDown) {
+      this.player.body.setVelocityY(this.speed);
     } else {
       this.player.body.setVelocity(0);
     }
+
   }
 
   dumpJoyStickState() {
@@ -146,56 +140,25 @@ export default class world extends Phaser.Scene {
         s += name + " ";
       }
     }
-    let speed = 256;
-    if (this.cursorKeys.down.isDown) {
-      this.player.body.setVelocityY(speed);
-    } else if (this.cursorKeys.up.isDown) {
-      this.player.body.setVelocityY(-speed);
-    } else if (this.cursorKeys.left.isDown) {
-      this.player.body.setVelocityX(-speed);
-      this.player.flipX = false;
-    } else if (this.cursorKeys.right.isDown) {
-      this.player.body.setVelocityX(speed);
-      this.player.flipX = true;
-    } else {
-      this.player.body.setVelocity(0);
-    }
 
+    // // vJoysticks
+    // if (this.cursorKeys.down.isDown) {
+    //   this.player.body.setVelocityY(this.speed);
+    // } else if (this.cursorKeys.up.isDown) {
+    //   this.player.body.setVelocityY(-this.speed);
+    // } else if (this.cursorKeys.left.isDown) {
+    //   this.player.body.setVelocityX(-this.speed);
+    //   this.player.flipX = false;
+    // } else if (this.cursorKeys.right.isDown) {
+    //   this.player.body.setVelocityX(this.speed);
+    //   this.player.flipX = true;
+    // } else {
+    //   this.player.body.setVelocity(0);
+    // }
+  
     s += "\n";
     s += "Force: " + Math.floor(this.joyStick.force * 100) / 100 + "\n";
     s += "Angle: " + Math.floor(this.joyStick.angle * 100) / 100 + "\n";
     this.text.setText(s);
   }
-}
-
-var CreateKnob = function (scene, x, y, inputMode) {
-  return scene.rexUI.add.knob({
-      x: x, y: y,
-      width: 200, height: 200,
-
-      space: { left: 20, right: 20, top: 20, bottom: 20 },
-
-      background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY).setStrokeStyle(1, COLOR_LIGHT),
-
-      trackColor: COLOR_DARK,
-      barColor: COLOR_LIGHT,
-      // centerColor: COLOR_PRIMARY,
-      // anticlockwise: true,
-
-      text: scene.rexUI.add.label({
-          text: scene.add.text(0, 0, '', {
-              fontSize: '30px',
-          }),
-          //icon: scene.add.image(0, 0, 'volume'),
-          space: {
-              icon: 10
-          }
-      }),
-      textFormatCallback: function (value) {
-          return Math.floor(value * 100).toString();
-      },
-
-      easeValue: { duration: 250 },
-      input: inputMode
-  })
 }

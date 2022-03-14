@@ -18,6 +18,7 @@ export default {
     window.Phaser = Phaser;
 
     this.game = new Game();
+    console.log("this.game: ", this.game)
   },
   methods: {},
   watch: {},

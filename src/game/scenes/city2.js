@@ -20,7 +20,7 @@ export default class city2 extends Phaser.Scene {
     create() {
         console.log('*** city2/castle');
         console.log('inventory: ', this.inventory);
-        PubSub.publish(window.TOPIC2, {event:"city2"});
+        PubSub.publish(window.TOPIC2, {event:"castle"});
 
         this.pingSnd = this.sound.add('ping');
 

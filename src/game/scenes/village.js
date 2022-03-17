@@ -1,3 +1,5 @@
+import Phaser from "phaser";
+import PubSub from 'pubsub-js'
 export default class village extends Phaser.Scene {
 
     constructor() {
@@ -8,9 +10,7 @@ export default class village extends Phaser.Scene {
         this.dropChestCnt = 0;
         this.dropFireballCnt = 0;
         this.dropIceballCnt = 0;
-
     }
-
 
     init(data) {
         this.player = data.player
@@ -22,6 +22,7 @@ export default class village extends Phaser.Scene {
     create() {
         console.log('*** village');
         console.log('inventory: ', this.inventory);
+        PubSub.publish(window.TOPIC2, {event:"village"});
 
         console.log('dropHorse: ', this.dropHorseCnt);
         console.log('dropChest: ', this.dropChestCnt);
@@ -29,7 +30,7 @@ export default class village extends Phaser.Scene {
         console.log('dropIceball: ', this.dropIceballCnt);
 
         this.pingSnd = this.sound.add('ping');
-        this.moongateSnd = this.sound.add('moongate');
+        //this.moongateSnd = this.sound.add('moongate');
 
         let map = this.make.tilemap({
             key: 'village'

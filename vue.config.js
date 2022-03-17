@@ -2,18 +2,12 @@
 module.exports = {
   configureWebpack:{
     devServer: {
-    // overlay: {
-    //   warnings: false,
-    //   errors: false
-    // },
-
+      hot: false,
+      liveReload: false,
     watchOptions:{
       poll: false,
       ignored: /node_modules/
     }
-
-
   }
-  }
-
+}
 }

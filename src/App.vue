@@ -4,8 +4,9 @@
     <h1>Testing Vue2 Phaser3</h1>
     <start-phaser> </start-phaser>
     <h1>Footer</h1>
-    {{keys}}<br>
-    {{events}}<br>
+    Keys: {{keys}}<br>
+    Last event: {{events}}<br>
+    {{eventArray}}<br>
   </div>
 </template>
 <script>
@@ -23,15 +24,17 @@ export default {
   data() {
     return {
       keys: {},
-      events: {}
+      events: {},
+      eventArray: []
     } 
   },
   methods: {
     saveKey(msg,data) {
-        this.keys = msg + " " + data.key
+        this.keys = msg + ": " + data.key
     },
     saveEvent(msg, data) {
-      this.events = msg + " " + data.event
+      this.events = msg + ": " + data.event
+      this.eventArray.push(this.events)
     }
 
   }, 

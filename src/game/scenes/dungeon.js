@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import PubSub from 'pubsub-js'
 import scriptdata from "./assets/script.json";
 export default class dungeon extends Phaser.Scene {
   constructor() {

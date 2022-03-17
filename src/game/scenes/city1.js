@@ -98,9 +98,11 @@ export default class city1 extends Phaser.Scene {
         this.inventory.chest++;
         console.log('Collect Chest', this.inventory.chest);
 
-        console.log('Emit event', this.inventory)
-        this.invEvent = (event, data) => this.scene.get('showInventory').events.emit(event, data);
-        this.invEvent("inventory", this.inventory);
+        //console.log('Emit event', this.inventory)
+        //this.invEvent = (event, data) => this.scene.get('showInventory').events.emit(event, data);
+        //this.invEvent("inventory", this.inventory);
+
+        PubSub.publish(window.TOPIC2, {event:"collect chest"});
 
         this.citymap.removeTileAt(tile.x, tile.y);
         return false;

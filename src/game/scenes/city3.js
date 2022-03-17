@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import PubSub from 'pubsub-js'
 export default class city3 extends Phaser.Scene {
 
     constructor() {
@@ -18,6 +19,7 @@ export default class city3 extends Phaser.Scene {
     create() {
         console.log('*** city3/bigcastle ');
         console.log('inventory: ', this.inventory);
+        PubSub.publish(window.TOPIC2, {event:"big castle"});
 
         this.pingSnd = this.sound.add('ping');
 

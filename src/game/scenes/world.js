@@ -1,8 +1,11 @@
 import Phaser from "phaser";
+import PubSub from 'pubsub-js'
 
 const COLOR_PRIMARY = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
+
+let TOPIC = "MOVE";
 
 export default class world extends Phaser.Scene {
   constructor() {
@@ -120,12 +123,16 @@ export default class world extends Phaser.Scene {
     // keyboard & vJoysticks keys
     if (this.cursors.left.isDown ||this.cursorKeys.left.isDown ) {
       this.player.body.setVelocityX(-this.speed);
+      PubSub.publish(TOPIC, {key:"left"});
     } else if (this.cursors.right.isDown || this.cursorKeys.right.isDown ) {
       this.player.body.setVelocityX(this.speed);
+      PubSub.publish(TOPIC, {key:"right"});
     } else if (this.cursors.up.isDown || this.cursorKeys.up.isDown) {
       this.player.body.setVelocityY(-this.speed);
+      PubSub.publish(TOPIC, {key:"up"});
     } else if (this.cursors.down.isDown || this.cursorKeys.down.isDown) {
       this.player.body.setVelocityY(this.speed);
+      PubSub.publish(TOPIC, {key:"down"});
     } else {
       this.player.body.setVelocity(0);
     }

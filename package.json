@@ -11,6 +11,7 @@
     "bootstrap-vue": "^2.21.2",
     "phaser": "^3.55.2",
     "phaser3-rex-plugins": "^1.1.67",
+    "pubsub-js": "^1.9.4",
     "vue": "^2.6.11"
   },
   "devDependencies": {

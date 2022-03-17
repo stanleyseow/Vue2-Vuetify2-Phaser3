@@ -1,10 +1,19 @@
 import Phaser from "phaser";
 import preload from "./scenes/preload"
 import world from "./scenes/world"
+import city1 from "./scenes/city1";
+import city2 from "./scenes/city2";
+import city3 from "./scenes/city3";
+import dungeon from "./scenes/dungeon";
+import village from "./scenes/village";
+
+
 import VirtualJoystickPlugin from "phaser3-rex-plugins/plugins/virtualjoystick-plugin.js";
 import UIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
 import EventEmitterMethods from 'phaser3-rex-plugins/plugins/utils/eventemitter/EventEmitterMethods.js';
 
+window.TOPIC1 = "MOVE"
+window.TOPIC2 = "EVENT"
 
 export default class Game extends Phaser.Game {
   constructor() {
@@ -43,7 +52,7 @@ export default class Game extends Phaser.Game {
       parent: "phaser-div",
       backgroundColor: "#555555",
       pixelArt: true,
-      scene: [preload, world ],
+      scene: [preload, world, city1, city2, city3, dungeon, village ],
     };
 
     super(config);

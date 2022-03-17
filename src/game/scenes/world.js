@@ -5,8 +5,6 @@ const COLOR_PRIMARY = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
-let TOPIC = "MOVE";
-
 export default class world extends Phaser.Scene {
   constructor() {
     super("world");
@@ -15,6 +13,8 @@ export default class world extends Phaser.Scene {
 
   init(data) {
     console.log("*** init world");
+    this.player = data.player
+    this.inventory = data.inventory
   }
 
   preload() {
@@ -23,6 +23,8 @@ export default class world extends Phaser.Scene {
 
   create() {
     console.log("*** create world: ", this);
+    PubSub.publish(window.TOPIC2, {event:"world"});
+
     let map = this.make.tilemap({
       key: "map0",
     });
@@ -87,7 +89,6 @@ export default class world extends Phaser.Scene {
     this.minimap.setBackgroundColor(0x000000);
     this.minimap.startFollow(this.player);
 
-
     var config = {
       x: 100,
       y: 550,
@@ -103,9 +104,6 @@ export default class world extends Phaser.Scene {
     // fix the text to the camera
     this.text.setScrollFactor(0);
 
-    console.log("this.plugins: ", 
-    this.plugins.get("rexVirtualJoystick").add(this, config))
-
     this.joyStick = this.plugins
       .get("rexVirtualJoystick")
       .add(this, config)
@@ -113,6 +111,16 @@ export default class world extends Phaser.Scene {
       
     
     this.cursors = this.input.keyboard.createCursorKeys();
+
+    this.mapLayer.setTileIndexCallback(10, this.dungeon, this);
+    this.mapLayer.setTileIndexCallback(11, this.city1, this);
+    this.mapLayer.setTileIndexCallback(12, this.castle, this);
+    this.mapLayer.setTileIndexCallback(15, this.bigcastle, this);
+    this.mapLayer.setTileIndexCallback(13, this.village, this);
+
+
+    this.physics.add.collider(this.mapLayer, this.player);
+
   }
 
   update() {
@@ -123,21 +131,61 @@ export default class world extends Phaser.Scene {
     // keyboard & vJoysticks keys
     if (this.cursors.left.isDown ||this.cursorKeys.left.isDown ) {
       this.player.body.setVelocityX(-this.speed);
-      PubSub.publish(TOPIC, {key:"left"});
+      PubSub.publish(window.TOPIC1, {key:"left"});
     } else if (this.cursors.right.isDown || this.cursorKeys.right.isDown ) {
       this.player.body.setVelocityX(this.speed);
-      PubSub.publish(TOPIC, {key:"right"});
+      PubSub.publish(window.TOPIC1, {key:"right"});
     } else if (this.cursors.up.isDown || this.cursorKeys.up.isDown) {
       this.player.body.setVelocityY(-this.speed);
-      PubSub.publish(TOPIC, {key:"up"});
+      PubSub.publish(window.TOPIC1, {key:"up"});
     } else if (this.cursors.down.isDown || this.cursorKeys.down.isDown) {
       this.player.body.setVelocityY(this.speed);
-      PubSub.publish(TOPIC, {key:"down"});
+      PubSub.publish(window.TOPIC1, {key:"down"});
     } else {
       this.player.body.setVelocity(0);
     }
 
   }
+
+  dungeon(player, tile) {
+    console.log('dungeon ')
+    this.scene.start('dungeon', {
+        player: player,
+        inventory: this.inventory
+    });
+}
+
+village(player, tile) {
+    console.log('village ')
+    this.scene.start('village', {
+        player: player,
+        inventory: this.inventory
+    });
+}
+
+city1(player, tile) {
+    console.log('city: ')
+    this.scene.start('city1', {
+        player: player,
+        inventory: this.inventory
+    });
+}
+
+castle(player, tile) {
+    console.log('castle ')
+    this.scene.start('city2', {
+        player: player,
+        inventory: this.inventory
+    })
+}
+
+bigcastle(player, tile) {
+    console.log('big castle ')
+    this.scene.start('city3', {
+        player: player,
+        inventory: this.inventory
+    })
+}
 
   dumpJoyStickState() {
     this.cursorKeys = this.joyStick.createCursorKeys();

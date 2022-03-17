@@ -4,13 +4,16 @@
     <h1>Testing Vue2 Phaser3</h1>
     <start-phaser> </start-phaser>
     <h1>Footer</h1>
-    {{keys}}
+    {{keys}}<br>
+    {{events}}<br>
   </div>
 </template>
 <script>
 import startPhaser from "./components/startPhaser";
 import PubSub from 'pubsub-js'
-let TOPIC = "MOVE"
+
+var TOPIC1 = "MOVE"
+var TOPIC2 = "EVENT"
 
 export default {
   name: "App",
@@ -19,21 +22,31 @@ export default {
   },
   data() {
     return {
-      keys: {}
+      keys: {},
+      events: {}
     } 
   },
   methods: {
-    sendKey(key) {
-        this.keys = key
+    saveKey(msg,data) {
+        this.keys = msg + " " + data.key
+    },
+    saveEvent(msg, data) {
+      this.events = msg + " " + data.event
     }
+
   }, 
   mounted() {
-  PubSub.subscribe(TOPIC, (msg,data) => {
-    //console.log(msg, data)
-    this.sendKey(data.key);
-});
+  PubSub.subscribe(TOPIC1, (msg,data) => {
+    console.log(msg, data)
+    this.saveKey(msg,data);
+  });
 
+  PubSub.subscribe(TOPIC2, (msg,data) => {
+    console.log(msg, data)
+    this.saveEvent(msg, data);
+  });
   }
+  
 }
 
 

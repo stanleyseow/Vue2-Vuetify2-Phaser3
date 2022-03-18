@@ -81,7 +81,6 @@ export default class world extends Phaser.Scene {
     );
 
     this.cameras.main.fadeFrom(FADE_DURATION);
-    //this.scene.setVisible(true, this.room);
     this.cameras.main.startFollow(this.player);
 
     // mini map

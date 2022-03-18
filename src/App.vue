@@ -10,7 +10,7 @@
   </div>
 </template>
 <script>
-import startPhaser from "./components/startPhaser";
+import startPhaser from "./components/startPhaser.vue";
 import PubSub from 'pubsub-js'
 
 var TOPIC1 = "MOVE"
@@ -54,7 +54,7 @@ export default {
 
 
 </script>
-<style lang="scss">
+<style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

@@ -1,7 +1,5 @@
-
 module.exports = {
-  configureWebpack:{
-    devServer: {
+     devServer: {
       hot: false,
       liveReload: false,
     watchOptions:{
@@ -9,5 +7,4 @@ module.exports = {
       ignored: /node_modules/
     }
   }
-}
 }

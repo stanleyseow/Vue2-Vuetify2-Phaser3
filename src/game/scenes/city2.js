@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import PubSub from 'pubsub-js'
+let FADE_DURATION = 1000;
 export default class city2 extends Phaser.Scene {
 
     constructor() {
@@ -89,6 +90,7 @@ export default class city2 extends Phaser.Scene {
 
         }
 
+    this.cameras.main.fadeFrom(FADE_DURATION);
 
 
     }

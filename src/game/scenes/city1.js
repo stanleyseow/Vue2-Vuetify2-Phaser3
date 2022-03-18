@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import PubSub from 'pubsub-js'
+let FADE_DURATION = 1000;
 export default class city1 extends Phaser.Scene {
 
     constructor() {
@@ -56,6 +57,8 @@ export default class city1 extends Phaser.Scene {
 
 
         this.cursors = this.input.keyboard.createCursorKeys();
+
+        this.cameras.main.fadeFrom(FADE_DURATION);
 
     }
 

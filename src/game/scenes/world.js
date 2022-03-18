@@ -4,6 +4,7 @@ import PubSub from 'pubsub-js'
 const COLOR_PRIMARY = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
+let FADE_DURATION = 1000;
 
 export default class world extends Phaser.Scene {
   constructor() {
@@ -79,6 +80,8 @@ export default class world extends Phaser.Scene {
       map.heightInPixels * this.zoomFactor + 64
     );
 
+    this.cameras.main.fadeFrom(FADE_DURATION);
+    //this.scene.setVisible(true, this.room);
     this.cameras.main.startFollow(this.player);
 
     // mini map
@@ -165,6 +168,8 @@ village(player, tile) {
 
 city1(player, tile) {
     console.log('city: ')
+    this.scene.stop('world');
+
     this.scene.start('city1', {
         player: player,
         inventory: this.inventory

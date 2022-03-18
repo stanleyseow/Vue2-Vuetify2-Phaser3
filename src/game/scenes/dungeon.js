@@ -1,6 +1,8 @@
 import Phaser from "phaser";
 import PubSub from 'pubsub-js'
 import scriptdata from "./assets/script.json";
+let FADE_DURATION = 1000;
+
 export default class dungeon extends Phaser.Scene {
   constructor() {
     super("dungeon");
@@ -33,9 +35,9 @@ export default class dungeon extends Phaser.Scene {
 
     let mapOffset = 0;
 
-    //let floorLayer = map
-    //  .createLayer("floorLayer", groundTiles, mapOffset, mapOffset)
-    //  .setScale(this.zoomFactor);
+    let floorLayer = map
+     .createLayer("floorLayer", groundTiles, mapOffset, mapOffset)
+     .setScale(this.zoomFactor);
 
     // const scriptLayer = map.createLayer(
     //   "Script",
@@ -134,16 +136,19 @@ export default class dungeon extends Phaser.Scene {
     this.physics.add.collider(this.player, this.dungeonLayer);
 
     this.cursors = this.input.keyboard.createCursorKeys();
+
+    this.cameras.main.fadeFrom(FADE_DURATION);
+
   }
 
   update() {
     // Close the dialog on spacebar press
-    if (this.gzDialog.visible) {
-      if (this.cursors.space.isDown) {
-        this.gzDialog.display(false);
-      }
-      return false;
-    }
+    // if (this.gzDialog.visible) {
+    //   if (this.cursors.space.isDown) {
+    //     this.gzDialog.display(false);
+    //   }
+    //   return false;
+    // }
 
     this.physics.moveToObject(this.skel1, this.player, 30, 3000);
     this.physics.moveToObject(this.skel2, this.player, 30, 3000);

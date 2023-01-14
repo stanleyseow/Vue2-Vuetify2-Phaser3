@@ -20,7 +20,7 @@ export default class Game extends Phaser.Game {
     const config = {
       type: Phaser.AUTO,
       width: 16 * 20 * 2,
-      height: 16 * 20 * 2,
+      height: 16 * 10 * 2,
       physics: {
         default: "arcade",
         arcade: {
@@ -42,9 +42,11 @@ export default class Game extends Phaser.Game {
       }]
       },  
       scale: {
-        zoom: 1,
-        mode: Phaser.Scale.FIT,
+        zoom: 1.2,
+        mode: Phaser.Scale.WIDTH_CONTROLS_HEIGHT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
+        width: 640,
+        height: 300
       },
       dom: {
         createContainer: true,

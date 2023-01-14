@@ -1,6 +1,8 @@
 <template>
   <div>
+    <v-main>
     <div id="phaser-div" class="phaser"></div>
+  </v-main>
   </div>
 </template>
 

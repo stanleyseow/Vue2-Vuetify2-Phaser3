@@ -1,13 +1,17 @@
 import Vue from "vue";
-import { BootstrapVue } from "bootstrap-vue";
-import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap-vue/dist/bootstrap-vue.css";
 import App from "./App.vue";
+import Vuetify from "vuetify";
+import "vuetify/dist/vuetify.min.css";
+import '@mdi/font/css/materialdesignicons.css'
 
-Vue.config.productionTip = false;
+const opts = {
+  icons: {
+    iconfont: "mdi"
+  }
+};
 
-Vue.use(BootstrapVue);
-
+Vue.use(Vuetify);
 new Vue({
   render: (h) => h(App),
+  vuetify: new Vuetify(opts),
 }).$mount("#app");

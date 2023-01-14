@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h3>Footer</h3>
+  <div class="test">
+    <h3 >Footer</h3>
     Keys: {{ keys }}<br />
     Last event: {{ events }}<br />
     {{ eventArray }}<br />
@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: "myProduct",
+  name: "pubsub-footer",
   props: {
     keys: {
       type: String,
@@ -23,3 +23,10 @@ export default {
   },
 };
 </script>
+<style scoped>
+.test {
+    background-color: #ffffff;  
+}
+  
+
+</style>

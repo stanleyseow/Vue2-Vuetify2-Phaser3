@@ -1,8 +1,6 @@
 <template>
   <div>
-    <v-main>
-    <div id="phaser-div" class="phaser"></div>
-  </v-main>
+    <div id="phaser-div" class="test"></div>
   </div>
 </template>
 
@@ -22,15 +20,11 @@ export default {
     this.game = new Game();
     console.log("this.game: ", this.game)
   },
-  methods: {},
-  watch: {},
-  computed: {},
 };
 </script>
 
 <style scoped>
-.phaser {
-  display: flex;
-  background: grey;
+.test {
+    background-color: #00ff00;  
 }
 </style>

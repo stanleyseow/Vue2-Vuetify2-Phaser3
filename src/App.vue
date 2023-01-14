@@ -2,15 +2,19 @@
   <div id="app">
     <v-app>
       <Navbar />
-      <start-phaser /> 
-      <pubsub-footer :keys="keys" :events="events" :eventArray="eventArray" />
+      <v-main>
+        <start-phaser />
+        <main-page />
+        <!-- <pubsub-footer :keys="keys" :events="events" :eventArray="eventArray" /> -->
+      </v-main>
     </v-app>
   </div>
 </template>
 <script>
 import startPhaser from "./components/startPhaser.vue";
 import Navbar from "./components/Navbar.vue";
-import pubsubFooter from "./components/pubsub-footer.vue";
+import pubsubFooter from "./components/pubsubFooter.vue";
+import mainPage from "./components/mainPage.vue";
 import PubSub from "pubsub-js";
 
 var TOPIC1 = "MOVE";
@@ -21,7 +25,8 @@ export default {
   components: {
     startPhaser,
     Navbar,
-    pubsubFooter
+    mainPage,
+    pubsubFooter,
   },
   data() {
     return {

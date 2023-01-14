@@ -52,7 +52,7 @@ export default class Game extends Phaser.Game {
         createContainer: true,
       },
       parent: "phaser-div",
-      backgroundColor: "#555555",
+      backgroundColor: "#000000",
       pixelArt: true,
       scene: [preload, world, city1, city2, city3, dungeon, village ],
     };

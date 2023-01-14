@@ -210,17 +210,17 @@ export default class preload extends Phaser.Scene {
     });
 
   // Small animations
-  this.dragon = this.add.sprite(550, 500, "u3").play("dragon").setScale(12);
+  this.dragon = this.add.sprite(550, 100, "u3").play("dragon").setScale(12);
 
   //this.chest = this.add.sprite(30, 550, 'u3').play('chest').setScale(4);
-  this.moongate = this.add.sprite(30, 550, "u3").play("moongate").setScale(4);
+  this.moongate = this.add.sprite(30, 150, "u3").play("moongate").setScale(4);
 
-  this.fireball = this.add.sprite(290, 550, "u3").play("fireball").setScale(4);
+  this.fireball = this.add.sprite(290, 150, "u3").play("fireball").setScale(4);
 
-  this.ranger = this.add.sprite(250, 550, "u3").play("ranger").setScale(4);
-  this.fighter = this.add.sprite(200, 550, "u3").play("fig").setScale(4);
-  this.wizard = this.add.sprite(140, 550, "u3").play("wiz").setScale(4);
-  this.cleric = this.add.sprite(90, 550, "u3").play("cle").setScale(4);
+  this.ranger = this.add.sprite(250, 150, "u3").play("ranger").setScale(4);
+  this.fighter = this.add.sprite(200, 150, "u3").play("fig").setScale(4);
+  this.wizard = this.add.sprite(140, 150, "u3").play("wiz").setScale(4);
+  this.cleric = this.add.sprite(90, 150, "u3").play("cle").setScale(4);
 
   // Dragon tweens
   this.time.addEvent({

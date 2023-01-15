@@ -23,6 +23,9 @@ export default class dungeon extends Phaser.Scene {
 
   create() {
     console.log("*** dungeon");
+    this.gzDialog.scene = this
+    
+    console.log("gzDialog: ", this.gzDialog);
     console.log("inventory: ", this.inventory);
 
     this.pingSnd = this.sound.add("ping");
@@ -97,7 +100,7 @@ export default class dungeon extends Phaser.Scene {
 
         this.physics.world.enable(tmp, 1);
         //this.physics.add.existing(tmp);
-        console.log("tmp: ", tmp);
+        //console.log("tmp: ", tmp);
         this.physics.add.collider(this.player, tmp, this.HitScript, null, this);
       });
     }
@@ -144,12 +147,12 @@ export default class dungeon extends Phaser.Scene {
 
   update() {
     // Close the dialog on spacebar press
-    // if (this.gzDialog.visible) {
-    //   if (this.cursors.space.isDown) {
-    //     this.gzDialog.display(false);
-    //   }
-    //   return false;
-    // }
+    if (this.gzDialog.visible) {
+      if (this.cursors.space.isDown) {
+        this.gzDialog.display(false);
+      }
+      return false;
+    }
 
     this.physics.moveToObject(this.skel1, this.player, 30, 3000);
     this.physics.moveToObject(this.skel2, this.player, 30, 3000);
@@ -173,6 +176,9 @@ export default class dungeon extends Phaser.Scene {
     // Set position beside city2 in worldmap
     player.x = 852;
     player.y = 255;
+    console.log("destroy gzDialog")
+    this.gzDialog.destroy()
+
     this.scene.start("world", {
       player: player,
       inventory: this.inventory,
@@ -195,12 +201,14 @@ export default class dungeon extends Phaser.Scene {
   }
 
   HitScript(player, target) {
-    console.log("HitScript: ", player, target);
+    console.log("HitScript: ", this.gzDialog);
+
     if (target.properties.name && !this.gzDialog.visible) {
       //player.anims.stopOnRepeat();
       this.gzDialog.setText(this.script[player.name][target.properties.name]);
     }
   }
+
   overScript(player, target) {
     console.log("overlap: ", player, target);
   }

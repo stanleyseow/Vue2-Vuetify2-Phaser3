@@ -46,12 +46,12 @@ export default {
   },
   mounted() {
     PubSub.subscribe(TOPIC1, (msg, data) => {
-      console.log(msg, data);
+      //console.log(msg, data);
       this.saveKey(msg, data);
     });
 
     PubSub.subscribe(TOPIC2, (msg, data) => {
-      console.log(msg, data);
+      //console.log(msg, data);
       this.saveEvent(msg, data);
     });
   },

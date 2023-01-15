@@ -11,6 +11,8 @@ import village from "./scenes/village";
 import VirtualJoystickPlugin from "phaser3-rex-plugins/plugins/virtualjoystick-plugin.js";
 import UIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
 import EventEmitterMethods from 'phaser3-rex-plugins/plugins/utils/eventemitter/EventEmitterMethods.js';
+import { GzDialog } from "./plugins/GzDialog.js";
+
 
 window.TOPIC1 = "MOVE"
 window.TOPIC2 = "EVENT"
@@ -39,8 +41,10 @@ export default class Game extends Phaser.Game {
           key: 'rexUI',
           plugin: UIPlugin,
           mapping: 'rexUI'
-      }]
-      },  
+        },
+        { key: "gzDialog", plugin: GzDialog, mapping: "gzDialog" }
+        ]
+      },
       scale: {
         zoom: 1.2,
         mode: Phaser.Scale.WIDTH_CONTROLS_HEIGHT,
@@ -54,7 +58,7 @@ export default class Game extends Phaser.Game {
       parent: "phaser-div",
       backgroundColor: "#000000",
       pixelArt: true,
-      scene: [preload, world, city1, city2, city3, dungeon, village ],
+      scene: [preload, world, city1, city2, city3, dungeon, village],
     };
 
     super(config);

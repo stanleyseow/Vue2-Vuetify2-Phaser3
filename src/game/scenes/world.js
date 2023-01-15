@@ -85,8 +85,8 @@ export default class world extends Phaser.Scene {
 
     // mini map
     this.minimap = this.cameras
-      .add(10, 10, 100, 100)
-      .setZoom(0.2)
+      .add(10, 10, 70, 70)
+      .setZoom(0.3)
       .setName("mini");
     this.minimap.setBackgroundColor(0x000000);
     this.minimap.startFollow(this.player);
@@ -94,17 +94,17 @@ export default class world extends Phaser.Scene {
     var config = {
       x: 60,
       y: 200,
-      radius: 50,
-      base: this.add.circle(0, 0, 50, 0x888888),
-      thumb: this.add.circle(0, 0, 25, 0xcccccc),
+      radius: 40,
+      base: this.add.circle(0, 0, 40, 0x888888),
+      thumb: this.add.circle(0, 0, 20, 0xcccccc),
     };
 
-    this.text = this.add.text(50, 420, "0", {
-      fontSize: "20px",
-      fill: "#ffffff",
-    });
-    // fix the text to the camera
-    this.text.setScrollFactor(0);
+    // this.text = this.add.text(50, 220, "0", {
+    //   fontSize: "20px",
+    //   fill: "#ffffff",
+    // });
+    
+    // this.text.setScrollFactor(0);
 
     this.joyStick = this.plugins
       .get("rexVirtualJoystick")
@@ -114,7 +114,7 @@ export default class world extends Phaser.Scene {
     
     this.cursors = this.input.keyboard.createCursorKeys();
 
-    this.mapLayer.setTileIndexCallback(10, this.dungeon, this);
+    //this.mapLayer.setTileIndexCallback(10, this.dungeon, this);
     this.mapLayer.setTileIndexCallback(11, this.city1, this);
     this.mapLayer.setTileIndexCallback(12, this.castle, this);
     this.mapLayer.setTileIndexCallback(15, this.bigcastle, this);
@@ -218,6 +218,6 @@ bigcastle(player, tile) {
     s += "\n";
     s += "Force: " + Math.floor(this.joyStick.force * 100) / 100 + "\n";
     s += "Angle: " + Math.floor(this.joyStick.angle * 100) / 100 + "\n";
-    this.text.setText(s);
+    //this.text.setText(s);
   }
 }

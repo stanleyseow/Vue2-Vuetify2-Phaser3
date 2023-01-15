@@ -85,15 +85,15 @@ export default class world extends Phaser.Scene {
 
     // mini map
     this.minimap = this.cameras
-      .add(480, 10, 150, 150)
+      .add(10, 10, 100, 100)
       .setZoom(0.2)
       .setName("mini");
     this.minimap.setBackgroundColor(0x000000);
     this.minimap.startFollow(this.player);
 
     var config = {
-      x: 100,
-      y: 550,
+      x: 60,
+      y: 200,
       radius: 50,
       base: this.add.circle(0, 0, 50, 0x888888),
       thumb: this.add.circle(0, 0, 25, 0xcccccc),

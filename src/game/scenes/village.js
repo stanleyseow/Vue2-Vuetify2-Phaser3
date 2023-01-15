@@ -96,6 +96,7 @@ export default class village extends Phaser.Scene {
         this.cursors = this.input.keyboard.createCursorKeys();
 
         this.cameras.main.fadeFrom(FADE_DURATION);
+        this.cameras.main.startFollow(this.player);
     }
 
     update() {

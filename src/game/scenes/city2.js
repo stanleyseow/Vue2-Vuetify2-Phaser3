@@ -91,6 +91,7 @@ export default class city2 extends Phaser.Scene {
         }
 
     this.cameras.main.fadeFrom(FADE_DURATION);
+    this.cameras.main.startFollow(this.player);
 
 
     }

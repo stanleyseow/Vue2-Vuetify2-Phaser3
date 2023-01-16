@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "@mdi/font": "^7.1.96",
-    "moralis": "^1.5.4",
     "phaser": "^3.55.2",
     "phaser3-rex-plugins": "^1.1.67",
     "pubsub-js": "^1.9.4",

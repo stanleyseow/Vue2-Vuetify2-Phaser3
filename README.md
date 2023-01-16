@@ -4,9 +4,8 @@
 - Vite
 - Vue2
 - Vuetify2
-- pubsub
+- Phaser3
+- pubsub ( optional , comms between Vue2 to Phaser3 )
 
-
-
-
+### Phaser3 game is launched in <start-phaser /> Vue components
 
